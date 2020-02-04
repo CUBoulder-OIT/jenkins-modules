@@ -71,6 +71,13 @@ def sendBuildStatus(String status, String secondaryMessage = "") {
     send(message, color)
 }
 
+def sendOitCiBuildStatus(String status, String taskId, String moduleName) {
+    def color = getColorByBuildStatus(status)
+    def message = "${status}: Log for ${env.JOB_NAME}: "
+    message += "https://oit-cloud-jenkins-state.s3-us-west-2.amazonaws.com/${taskId}/${moduleName}-console-output.txt"
+
+    send(message, color)
+}
 /**
  ** Function:
  * Send build status message using predefined template adding lastChanges plugin output.
